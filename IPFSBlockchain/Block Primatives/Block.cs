@@ -29,6 +29,7 @@ namespace IPFSBlockchain.Block_Primatives
         //Properties
         public string Hash { get { return _hash; } }
         public string LastHash { get { return _previoushash; }  }
+        public List<string> BlockData { get { return _data; } }
 
         //Methods
         public string CalculateHash()
@@ -43,7 +44,7 @@ namespace IPFSBlockchain.Block_Primatives
         }
 
         //Return data as one csv string
-        private string ListToCSV()
+        public string ListToCSV()
         {
             if (_data.Count > 0)
             {

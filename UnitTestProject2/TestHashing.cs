@@ -14,17 +14,20 @@ namespace IPFSBlockchainUnitTests
         Mock<Block> mockBlock = new Mock<Block>();
 
         [TestMethod]
-        public void TestBlock()
+        public void TestBlockHashing()
         {
         //Arrange
             addData();
             LinkedList<Block> blockchain = new LinkedList<Block>();
+
+        //Act
             Block testBlock01 = new Block(mockList.Object, "0");
             blockchain.AddLast(testBlock01);
             Block testblock02 = new Block(mockList.Object, testBlock01.Hash);
             blockchain.AddLast(testblock02);
             Block testblock03 = new Block(mockList.Object, testblock02.Hash);
-
+        
+        //Assert
             foreach(Block item in blockchain)
             {
                 Assert.AreEqual("7563AF9DBBED6E45941F422B85B43199EC03F709CCA4E996B6D5886097F90180D11CF05D978A2C4EFBAE154E43B0D456C2FA30EF79D4D80E2B5D731D84F6D53E",
@@ -39,6 +42,25 @@ namespace IPFSBlockchainUnitTests
 
       
         }
+
+        [TestMethod]
+        public void TestListToCSV()
+        {
+            //Arrange
+            addData();
+            Block testBlock = new Block(mockList.Object, "0");
+            List<string> data = testBlock.BlockData;
+            StringBuilder sb = new StringBuilder();
+            //Act
+            foreach(string item in data)
+            {
+                sb.Append($"{item};");
+            }
+            string test = sb.ToString();
+            //Assert
+            Assert.AreEqual(test, testBlock.ListToCSV());
+        }
+
         //add string of items to the mocklist
         private void addData()
         {
