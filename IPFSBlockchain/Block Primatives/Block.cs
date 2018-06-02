@@ -15,6 +15,7 @@ namespace IPFSBlockchain.Block_Primatives
         private string _previoushash;
         private List<string> _data;
         private long timestamp;
+        private uint nonce;
 
         //Constructor
         public Block(List<string> data, string previousHash)
@@ -38,6 +39,7 @@ namespace IPFSBlockchain.Block_Primatives
                 (
                     _previoushash +
                     timestamp.ToString() +
+                    nonce.ToString() +
                     ListToCSV()
                 );
             return createHash;
