@@ -23,10 +23,38 @@ namespace IPFSBlockchain.Block_Primatives
             _previoushash = previousHash;
             long epochTicks = new DateTime(1970, 1, 1,0,0,0, DateTimeKind.Utc).Ticks;
             timestamp = epochTicks / TimeSpan.TicksPerSecond;
+            _hash = CalculateHash();
         }
 
         //Properties
         public string Hash { get { return _hash; } }
         public string LastHash { get { return _previoushash; }  }
+
+        //Methods
+        public string CalculateHash()
+        {
+            string createHash = StringUtil.applyBlake2
+                (
+                    _previoushash +
+                    timestamp.ToString() +
+                    ListToCSV()
+                );
+            return createHash;
+        }
+
+        //Return data as one csv string
+        private string ListToCSV()
+        {
+            if (_data.Count > 0)
+            {
+                StringBuilder sb = new StringBuilder();
+                foreach (string item in _data)
+                {
+                    sb.Append($"{item};");
+                }
+                return sb.ToString();
+            }
+            else return "";
+        }
     }
 }

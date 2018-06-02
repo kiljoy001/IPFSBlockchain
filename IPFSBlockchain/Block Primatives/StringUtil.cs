@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using Konscious.Security.Cryptography;
+using ParallelRandomClassLib;
 
 namespace IPFSBlockchain.Block_Primatives
 {
@@ -17,8 +18,8 @@ namespace IPFSBlockchain.Block_Primatives
                 StringBuilder builder = new StringBuilder();
                 for(int i=0; i <hash.Length; i++)
                 {
-                    string hex = String.Format("{0:X}", hash[i]);
-                    if(hex.Length == 1)
+                    string hex = String.Format("{0:X2}", hash[i]);
+                    if(hex.Length >= 1)
                     {
                         builder.Append(hex);
                     }
@@ -27,7 +28,7 @@ namespace IPFSBlockchain.Block_Primatives
             }
             catch (Exception e)
             {
-                System.ArgumentException argEx = new ArgumentException("Input error in applyBlake2", "input", e);
+                Exception argEx = new Exception($"{e.Message.ToString()} error in StringUtil.applyBlake2");
                 throw argEx;
             }
         }

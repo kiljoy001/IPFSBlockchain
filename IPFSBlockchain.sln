@@ -7,6 +7,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IPFSBlockchain", "IPFSBlock
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParallelRandomClassLib", "..\..\..\Documents\Source\Repos\Parallel_PRNG\ParallelRandomClassLib\ParallelRandomClassLib.csproj", "{DF1E14F5-90CB-4510-9A5E-CFC60E0822A8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IPFSBlockchainUnitTests", "UnitTestProject2\IPFSBlockchainUnitTests.csproj", "{80AFFD1A-BAA9-4F2B-85B6-7D64A41D7A92}"
+	ProjectSection(ProjectDependencies) = postProject
+		{DF1E14F5-90CB-4510-9A5E-CFC60E0822A8} = {DF1E14F5-90CB-4510-9A5E-CFC60E0822A8}
+		{BCF3C9F8-D8DC-4119-B393-F90E198EFC96} = {BCF3C9F8-D8DC-4119-B393-F90E198EFC96}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +27,10 @@ Global
 		{DF1E14F5-90CB-4510-9A5E-CFC60E0822A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DF1E14F5-90CB-4510-9A5E-CFC60E0822A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DF1E14F5-90CB-4510-9A5E-CFC60E0822A8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{80AFFD1A-BAA9-4F2B-85B6-7D64A41D7A92}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{80AFFD1A-BAA9-4F2B-85B6-7D64A41D7A92}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{80AFFD1A-BAA9-4F2B-85B6-7D64A41D7A92}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{80AFFD1A-BAA9-4F2B-85B6-7D64A41D7A92}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
