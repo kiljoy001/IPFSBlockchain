@@ -17,6 +17,10 @@ namespace IPFSBlockchain
             Console.WriteLine($"Test Block 1:{testblock1.Hash} \nTest Block 2:{testblock2.Hash} \nTest Block 3:{testblock3.Hash}");
             Console.ReadLine();
 
+            int difficulty = 00001111;
+            string test = new string (new char[difficulty]).Replace('\0', '0');
+            Console.WriteLine($"{test}");
+            Console.ReadLine();
         }
     }
 }

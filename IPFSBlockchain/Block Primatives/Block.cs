@@ -59,5 +59,16 @@ namespace IPFSBlockchain.Block_Primatives
             }
             else return "";
         }
+
+        //Create new Blocks
+        public void MiningBlock(int difficulty)
+        {
+            string target = new string(new char[difficulty]).Replace('\0', '0');
+            while(!Hash.Substring(0,difficulty).Equals(target))
+            {
+                nonce++;
+                _hash = CalculateHash();
+            }
+        }
     }
 }
