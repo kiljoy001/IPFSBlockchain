@@ -1,4 +1,5 @@
-﻿using System;
+﻿using IPFSBlockchain.Block_Primatives.Helpers;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -13,8 +14,12 @@ namespace IPFSBlockchain.Block_Primatives
             Chain.AddLast(firstBlock);
         }
 
+        public LinkedListNode<Block> LastBlock { get { return Chain.Last; } }
+        public int Count { get { return Chain.Count; } }
+
         public void Add(Block block)
         {
+            block.BlockNumber = Chain.Count64()+1;
             Chain.AddLast(block);
         }
 
@@ -36,6 +41,7 @@ namespace IPFSBlockchain.Block_Primatives
             }
 
         }
+
 
     }
 }

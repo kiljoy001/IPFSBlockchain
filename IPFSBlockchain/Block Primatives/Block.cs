@@ -16,7 +16,8 @@ namespace IPFSBlockchain.Block_Primatives
         private string _previoushash;
         private List<string> _data;
         private long timestamp;
-        private UInt64 nonce;
+        private long nonce;
+        private ulong _blockNumber;
 
         //Constructor
         public Block(List<string> data, string previousHash)
@@ -26,12 +27,14 @@ namespace IPFSBlockchain.Block_Primatives
             long epochTicks = new DateTime(1970, 1, 1,0,0,0, DateTimeKind.Utc).Ticks;
             timestamp = epochTicks / TimeSpan.TicksPerSecond;
             _hash = CalculateHash();
+            _blockNumber = BlockNumber;
         }
 
         //Properties
         public string Hash { get { return _hash; } }
         public string LastHash { get { return _previoushash; }  }
         public List<string> BlockData { get { return _data; } }
+        public ulong BlockNumber { get; set; }
 
         //Methods
         public string CalculateHash()
