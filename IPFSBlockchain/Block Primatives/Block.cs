@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using IPFSBlockchain.Block_Primatives.Helpers;
 
 namespace IPFSBlockchain.Block_Primatives
 {
@@ -15,7 +16,7 @@ namespace IPFSBlockchain.Block_Primatives
         private string _previoushash;
         private List<string> _data;
         private long timestamp;
-        private uint nonce;
+        private UInt64 nonce;
 
         //Constructor
         public Block(List<string> data, string previousHash)
@@ -61,10 +62,10 @@ namespace IPFSBlockchain.Block_Primatives
         }
 
         //Create new Blocks
-        public void MiningBlock(int difficulty)
+        public void MiningBlock(UInt64 difficulty)
         {
             string target = new string(new char[difficulty]).Replace('\0', '0');
-            while(!Hash.Substring(0,difficulty).Equals(target))
+            while(!Hash.UInt64Substring(0,difficulty).Equals(target))
             {
                 nonce++;
                 _hash = CalculateHash();
