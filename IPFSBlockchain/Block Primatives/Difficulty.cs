@@ -17,17 +17,28 @@ namespace IPFSBlockchain.Block_Primatives
             _chain = chain;
         }
 
-        private UInt64 calculateNext()
+        public UInt64 calculateNext()
         {
-            Block lastBlock = _chain.LastBlock.Previous.Value;
-
-            //Last 10 blocks
-            Block[] last10 = new Block[9];
-            for(long i =0; i > last10.Length; i++)
+            Block[] blockArray = _chain.ToArray();
+            if(blockArray.Length > 10)
             {
-                last10[i] = -_chain.LastBlock.
+                ulong sum = 0;
+                for (int i = blockArray.Length - 10; i < blockArray.Length; i++)
+                {
+                    sum += blockArray[i].Difficulty;
+                }
+                return sum++ / (ulong)blockArray.Length;
             }
-
+            else
+            {
+                ulong sum = 0;
+                for (int i = 0; i < blockArray.Length; i++)
+                {
+                    sum += blockArray[i].Difficulty;
+                }
+                return sum++ / (ulong)blockArray.Length;
+            }
+            
         }
     }
 }

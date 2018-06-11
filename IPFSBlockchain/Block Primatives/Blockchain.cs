@@ -8,6 +8,8 @@ namespace IPFSBlockchain.Block_Primatives
     public class Blockchain
     {
         static private LinkedList<Block> Chain;
+        
+
         public Blockchain(Block firstBlock)
         {
             LinkedListNode<Block> node = new LinkedListNode<Block>(firstBlock);
@@ -16,10 +18,13 @@ namespace IPFSBlockchain.Block_Primatives
 
         public LinkedListNode<Block> LastBlock { get { return Chain.Last; } }
         public int Count { get { return Chain.Count; } }
+        
 
         public void Add(Block block)
         {
             block.BlockNumber = Chain.Count64()+1;
+            Difficulty diff = new Difficulty(block.Difficulty, this);
+            block.Difficulty = diff.calculateNext();
             Chain.AddLast(block);
         }
 
@@ -40,6 +45,13 @@ namespace IPFSBlockchain.Block_Primatives
                 return true;
             }
 
+        }
+
+        public Block[] ToArray()
+        {
+            Block[] lastBlocks = new Block[Chain.Count];
+            Chain.CopyTo(lastBlocks, 0);
+            return lastBlocks;
         }
 
 

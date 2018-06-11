@@ -16,8 +16,9 @@ namespace IPFSBlockchain.Block_Primatives
         private string _previoushash;
         private List<string> _data;
         private long timestamp;
-        private long nonce;
+        private ulong nonce;
         private ulong _blockNumber;
+        private ulong difficulty;
 
         //Constructor
         public Block(List<string> data, string previousHash)
@@ -34,7 +35,9 @@ namespace IPFSBlockchain.Block_Primatives
         public string Hash { get { return _hash; } }
         public string LastHash { get { return _previoushash; }  }
         public List<string> BlockData { get { return _data; } }
+        //These are set by the blockchain 
         public ulong BlockNumber { get; set; }
+        public ulong Difficulty { get; set; }
 
         //Methods
         public string CalculateHash()
