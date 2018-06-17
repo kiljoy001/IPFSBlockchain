@@ -1,4 +1,5 @@
 ﻿using IPFSBlockchain.Block_Primatives;
+using IPFSBlockchain.Block_Primatives.Helpers;
 using System;
 using System.Collections.Generic;
 
@@ -13,13 +14,21 @@ namespace IPFSBlockchain
             Block testblock1 = new Block(list, "0");
             Block testblock2 = new Block(list, testblock1.Hash);
             Block testblock3 = new Block(list, testblock2.Hash);
-
+            Block firstTestBlock = new Block(list, "0");
             Console.WriteLine($"Test Block 1:{testblock1.Hash} \nTest Block 2:{testblock2.Hash} \nTest Block 3:{testblock3.Hash}");
             Console.ReadLine();
-
-            int difficulty = 00001111;
+            ulong testSubstring = 123456789;
+            string setup = testSubstring.ToString();
+            Console.WriteLine(setup.Substring(0, testSubstring.ToString().Length));
+            Console.ReadLine();
+            int difficulty = 1;
             string test = new string (new char[difficulty]).Replace('\0', '0');
             Console.WriteLine($"{test}");
+            Console.ReadLine();
+            Blockchain chain = new Blockchain(firstTestBlock);
+            Difficulty testDifficulty = new Difficulty(1, chain);
+            firstTestBlock.MiningBlock(testDifficulty.calculateNext(), list);
+            Console.WriteLine($"Chain height: {chain.Count}");
             Console.ReadLine();
         }
     }

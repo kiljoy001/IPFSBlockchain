@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Numerics;
 using System.Text;
 using IPFSBlockchain.Block_Primatives.Helpers;
+using ParallelRandomClassLib;
 
 namespace IPFSBlockchain.Block_Primatives
 {
@@ -18,7 +20,7 @@ namespace IPFSBlockchain.Block_Primatives
         private long timestamp;
         private ulong nonce;
         private ulong _blockNumber;
-        private ulong difficulty;
+        
 
         //Constructor
         public Block(List<string> data, string previousHash)
@@ -68,14 +70,24 @@ namespace IPFSBlockchain.Block_Primatives
         }
 
         //Create new Blocks
-        public void MiningBlock(UInt64 difficulty)
+        public Block MiningBlock(UInt64 difficulty, List<string> data)
         {
+            PRNG random = new PRNG();
+            ulong max = ulong.MaxValue;
+            ulong min = ulong.MinValue;
+            BigInteger biMin = new BigInteger(min);
+            BigInteger biMax = new BigInteger(max);
+
             string target = new string(new char[difficulty]).Replace('\0', '0');
-            while(!Hash.UInt64Substring(0,difficulty).Equals(target))
+            while (!Hash.Substring(0, difficulty.ToString().Length).Equals(target))
             {
-                nonce++;
+                nonce = (ulong)random.Next(biMin, biMax);
                 _hash = CalculateHash();
+                //testing output
+                Console.WriteLine($"{_hash}");
             }
+            Block newBlock = new Block(data, _hash);
+            return newBlock;
         }
     }
 }

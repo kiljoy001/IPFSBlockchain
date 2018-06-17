@@ -7,7 +7,7 @@ namespace IPFSBlockchain.Block_Primatives
 {
     public class Blockchain
     {
-        static private LinkedList<Block> Chain;
+        static private LinkedList<Block> Chain = new LinkedList<Block>();
         
 
         public Blockchain(Block firstBlock)
@@ -53,6 +53,8 @@ namespace IPFSBlockchain.Block_Primatives
             Chain.CopyTo(lastBlocks, 0);
             return lastBlocks;
         }
+
+
 
 
     }

@@ -36,7 +36,7 @@ namespace IPFSBlockchain.Block_Primatives
                 {
                     sum += blockArray[i].Difficulty;
                 }
-                return sum++ / (ulong)blockArray.Length;
+                return sum++  + (ulong)_chain.Count / (ulong)blockArray.Length;
             }
             
         }
