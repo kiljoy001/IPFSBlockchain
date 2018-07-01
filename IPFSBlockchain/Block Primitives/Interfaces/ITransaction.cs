@@ -7,9 +7,8 @@ namespace IPFSBlockchain.Block_Primitives.Interfaces
 {
     interface ITransaction
     {
-        MerkleTree tree { get; set; }
         string CalculateTransactionHash();
-        void AddTransaction();
-        string ReturnToPool();
+        string TransactionDetails();
+        string[] ReturnToPool(ITransactionPool pool);
     }
 }

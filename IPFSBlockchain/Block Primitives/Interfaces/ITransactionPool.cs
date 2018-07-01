@@ -6,5 +6,6 @@ namespace IPFSBlockchain.Block_Primitives.Interfaces
 {
     interface ITransactionPool
     {
+
     }
 }
