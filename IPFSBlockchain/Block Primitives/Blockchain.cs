@@ -1,11 +1,12 @@
 ﻿using IPFSBlockchain.Block_Primatives.Helpers;
+using IPFSBlockchain.Block_Primitives.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace IPFSBlockchain.Block_Primatives
+namespace IPFSBlockchain.Block_Primatives 
 {
-    public class Blockchain
+    public class Blockchain : IBlockChain
     {
         static private LinkedList<Block> Chain = new LinkedList<Block>();
         

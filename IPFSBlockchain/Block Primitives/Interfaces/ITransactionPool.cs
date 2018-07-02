@@ -4,7 +4,7 @@ using System.Text;
 
 namespace IPFSBlockchain.Block_Primitives.Interfaces
 {
-    interface ITransactionPool
+    public interface ITransactionPool
     {
 
     }

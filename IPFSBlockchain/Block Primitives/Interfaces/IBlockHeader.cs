@@ -4,14 +4,15 @@ using System.Text;
 
 namespace IPFSBlockchain.Block_Primitives.Interfaces
 {
-    interface IBlockHeader
+    public interface IBlockHeader
     {
         //Properties
         string Hash { get; }
         string LastHash { get; }
-        List<string> BlockData { get; }
-        //These are set by the blockchain 
+        ulong Timestamp { get; }
+        //These are set by the blockchain object
         ulong BlockNumber { get; set; }
         ulong Difficulty { get; set; }
+        
     }
 }

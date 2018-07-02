@@ -3,53 +3,58 @@ using System.Collections.Generic;
 using System.Numerics;
 using System.Text;
 using IPFSBlockchain.Block_Primatives.Helpers;
+using IPFSBlockchain.Block_Primitives;
+using IPFSBlockchain.Block_Primitives.Interfaces;
+using MerkleTools;
 using ParallelRandomClassLib;
 
 namespace IPFSBlockchain.Block_Primatives
 {
-    public class Block
+    public class Block : IBlock
     {
         /// <summary>
         /// Implements block in blockchain
         /// Hash & Previous has exposed through properties
         /// </summary>
         /// 
-        private string _hash;
-        private string _previoushash;
+        private Header _header;
         private List<string> _data;
-        private long timestamp;
+        private MerkleTree _tree;
         private ulong nonce;
-        private ulong _blockNumber;
-        
 
         //Constructor
-        public Block(List<string> data, string previousHash)
+        public Block(List<string> data, IBlockHeader header)
         {
-            _data = data;
-            _previoushash = previousHash;
-            long epochTicks = new DateTime(1970, 1, 1,0,0,0, DateTimeKind.Utc).Ticks;
-            timestamp = epochTicks / TimeSpan.TicksPerSecond;
-            _hash = CalculateHash();
-            _blockNumber = BlockNumber;
+            _tree = new MerkleTree();
+            _header = (Header)header;
         }
 
         //Properties
-        public string Hash { get { return _hash; } }
-        public string LastHash { get { return _previoushash; }  }
+        public string Hash { get { return header.Hash; } }
+        public string LastHash { get { return header.LastHash; }  }
         public List<string> BlockData { get { return _data; } }
         //These are set by the blockchain 
         public ulong BlockNumber { get; set; }
         public ulong Difficulty { get; set; }
+        public IBlockHeader header { get => _header; }
+        public MerkleTree Transactions { get { return _tree; } }
+
+        //Add Transactions to the block
+        public void AddTransaction(ITransaction transaction)
+        {
+            throw new NotImplementedException();
+        }
 
         //Methods
         public string CalculateHash()
         {
             string createHash = StringUtil.applyBlake2
                 (
-                    _previoushash +
-                    timestamp.ToString() +
+                    header.LastHash +
+                    header.Timestamp.ToString() +
                     nonce.ToString() +
-                    ListToCSV()
+                    ListToCSV() +
+                    _tree.ToString()
                 );
             return createHash;
         }
@@ -77,17 +82,27 @@ namespace IPFSBlockchain.Block_Primatives
             ulong min = ulong.MinValue;
             BigInteger biMin = new BigInteger(min);
             BigInteger biMax = new BigInteger(max);
+            string hashCache = null;
 
             string target = new string(new char[difficulty]).Replace('\0', '0');
             while (!Hash.Substring(0, difficulty.ToString().Length).Equals(target))
             {
                 nonce = (ulong)random.Next(biMin, biMax);
-                _hash = CalculateHash();
+                hashCache = CalculateHash();
                 //testing output
-                Console.WriteLine($"{_hash}");
+                Console.WriteLine($"{hashCache}");
             }
-            Block newBlock = new Block(data, _hash);
+            //Create time
+            long epochTicks = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).Ticks;
+            ulong timestamp = (ulong)(epochTicks / TimeSpan.TicksPerSecond);
+            //New block header
+            Header blockHeaderConstructor = new Header(CalculateHash(), this.Hash, this.BlockNumber++, difficulty, timestamp);
+            //Data & Header to make new block
+            Block newBlock = new Block(data, blockHeaderConstructor);
             return newBlock;
         }
+
+       
+
     }
 }
