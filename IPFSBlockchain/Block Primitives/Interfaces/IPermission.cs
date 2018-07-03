@@ -8,12 +8,14 @@ namespace IPFSBlockchain.Block_Primitives.Interfaces
     {
         Global,
         ShareToOne,
-        ShareToMany
+        ShareToMany,
+        Group,
+        ShareToGroup
     }
 
     public interface IPermission
     {
         void SetPermission(EPermissions Permission);
-        IPermission GetPermission();
+        Tuple<IPermission> GetPermission();
     }
 }

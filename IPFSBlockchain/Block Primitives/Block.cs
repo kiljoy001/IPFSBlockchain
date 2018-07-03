@@ -75,7 +75,7 @@ namespace IPFSBlockchain.Block_Primatives
         }
 
         //Create new Blocks
-        public Block MiningBlock(UInt64 difficulty, List<string> data)
+        public Tuple<Block> MiningBlock(UInt64 difficulty, List<string> data)
         {
             PRNG random = new PRNG();
             ulong max = ulong.MaxValue;
@@ -99,7 +99,8 @@ namespace IPFSBlockchain.Block_Primatives
             Header blockHeaderConstructor = new Header(CalculateHash(), this.Hash, this.BlockNumber++, difficulty, timestamp);
             //Data & Header to make new block
             Block newBlock = new Block(data, blockHeaderConstructor);
-            return newBlock;
+            Tuple <Block> immutable_block = new Tuple<Block>(newBlock);
+            return immutable_block;
         }
 
        

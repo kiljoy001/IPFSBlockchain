@@ -14,6 +14,6 @@ namespace IPFSBlockchain.Block_Primitives.Interfaces
         MerkleTree Transactions {get; }
         void AddTransaction(ITransaction transaction);
         string CalculateHash();
-        Block MiningBlock(UInt64 difficulty, List<string> data);
+        Tuple<Block> MiningBlock(UInt64 difficulty, List<string> data);
     }
 }

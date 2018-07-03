@@ -21,8 +21,9 @@ namespace IPFSBlockchain.Block_Primatives
         public int Count { get { return Chain.Count; } }
         
 
-        public void Add(Block block)
+        public void Add(Tuple<Block> TupleBlock)
         {
+            Block block = TupleBlock.Item1;
             block.BlockNumber = Chain.Count64()+1;
             Difficulty diff = new Difficulty(block.Difficulty, this);
             block.Difficulty = diff.calculateNext();

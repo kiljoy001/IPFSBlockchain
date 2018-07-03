@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.Text;
 using IPFSBlockchain.Block_Primatives;
+using IPFSBlockchain.Block_Primitives.Interfaces;
 
 namespace IPFSBlockchain.Block_Primatives
 {
-    public class Difficulty
+    public class Difficulty : IDifficulty
     {
         private UInt64 _currentDifficulty;
         private UInt64 _updatedDifficulty;

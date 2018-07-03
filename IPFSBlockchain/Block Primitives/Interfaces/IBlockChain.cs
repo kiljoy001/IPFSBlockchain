@@ -7,7 +7,7 @@ namespace IPFSBlockchain.Block_Primitives.Interfaces
 {
     public interface IBlockChain
     {
-        void Add(Block block);
+        void Add(Tuple<Block> block);
         bool IsValid();
         Block[] ToArray();
     }

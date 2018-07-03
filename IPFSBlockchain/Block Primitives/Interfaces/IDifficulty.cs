@@ -4,9 +4,8 @@ using System.Text;
 
 namespace IPFSBlockchain.Block_Primitives.Interfaces
 {
-    public interface ITransactionPool
+    interface IDifficulty
     {
-        void AddTransaction();
-        void removeTransaction();
+        UInt64 calculateNext();
     }
 }
