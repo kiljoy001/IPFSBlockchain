@@ -48,7 +48,7 @@ namespace IPFSBlockchain.Block_Primatives
         //Methods
         public string CalculateHash()
         {
-            string createHash = StringUtil.applyBlake2
+            string createHash = StringUtil.ApplyBlake2
                 (
                     header.LastHash +
                     header.Timestamp.ToString() +

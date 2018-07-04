@@ -2,29 +2,43 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using ParallelRandomClassLib;
+using System.Numerics;
+using IPFSBlockchain.Block_Primatives;
 
 namespace IPFSBlockchain.Block_Primitives
 {
     public class Transaction : ITransaction
     {
         private string _hash;
-        private decimal _fee;
-        private IPermission permission;
+        private readonly IPermission _permission;
+        private readonly PRNG nonce;
 
-        public Transaction()
+        public Transaction(decimal Fee, IPermission permission)
         {
-
+            this.Fee = Fee;
+            _permission = permission;
+            nonce = new PRNG();
+            _hash = CalculateTransactionHash();
+            
         }
-        public decimal Fee { get => _fee; set { _fee = value; } }
+        public decimal Fee { get;  private set; }
 
         public string CalculateTransactionHash()
         {
-            throw new NotImplementedException();
+            string input =
+            Fee.ToString() +
+            _permission.GetPermission() +
+            nonce.Next(new BigInteger(ulong.MinValue), new BigInteger(ulong.MaxValue)).ToString();
+
+            return StringUtil.ApplyBlake2(input);
         }
 
         public int CompareTo(ITransaction other)
         {
-            throw new NotImplementedException();
+            if (Fee > other.Fee) return -1;
+            if (Fee == other.Fee) return 0;
+            return 1;
         }
 
         public IPermission GetPermission()
@@ -32,7 +46,7 @@ namespace IPFSBlockchain.Block_Primitives
             throw new NotImplementedException();
         }
 
-        public string[] ReturnToPool(ITransactionPool pool)
+        public ITransaction ReturnToPool(ITransactionPool pool)
         {
             throw new NotImplementedException();
         }

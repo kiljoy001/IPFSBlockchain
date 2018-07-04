@@ -9,8 +9,8 @@ namespace IPFSBlockchain.Block_Primitives.Interfaces
     {
         string CalculateTransactionHash();
         string TransactionDetails();
-        string[] ReturnToPool(ITransactionPool pool);
+        ITransaction ReturnToPool(ITransactionPool pool);
         IPermission GetPermission();
-        decimal Fee { get; set; }
+        decimal Fee { get; }
     }
 }

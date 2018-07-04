@@ -8,7 +8,7 @@ namespace IPFSBlockchain.Block_Primatives
 {
     public class StringUtil
     {
-        public static string applyBlake2(string input)
+        public static string ApplyBlake2(string input)
         {
             try
             {
