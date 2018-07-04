@@ -43,7 +43,7 @@ namespace IPFSBlockchain.Block_Primitives
 
         public IPermission GetPermission()
         {
-            throw new NotImplementedException();
+            return _permission;
         }
 
         public ITransaction ReturnToPool(ITransactionPool pool)

@@ -1,5 +1,6 @@
 ﻿using IPFSBlockchain.Block_Primatives;
 using IPFSBlockchain.Block_Primatives.Helpers;
+using IPFSBlockchain.Block_Primitives;
 using System;
 using System.Collections.Generic;
 
@@ -30,6 +31,15 @@ namespace IPFSBlockchain
             firstTestBlock.MiningBlock(testDifficulty.calculateNext(), list);
             Console.WriteLine($"Chain height: {chain.Count}");
             Console.ReadLine();
+        }
+
+        private Header[] Create_headers(int arraySize)
+        {
+            Header[] headerArray = new Header[arraySize];
+            for(int i = 0; i > arraySize; i++)
+            {
+
+            }
         }
     }
 }
